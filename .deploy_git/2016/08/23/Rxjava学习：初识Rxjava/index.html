@@ -1,0 +1,713 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/VENS/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/VENS/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Rxjava,RxAndroid," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/woshishenxian/woshishenxian.github.io/master/images/bitbug_favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言在过去的一年里，出现大量优秀的框架，火的不行，我也是从网上了解到Rx，特意搜索了相关文章，我也是通过它初步了解了Rxjava, 通过使用也慢慢领会到了其独特的魅力。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rxjava学习：初识Rxjava">
+<meta property="og:url" content="https://woshishenxian.github.io/2016/08/23/Rxjava学习：初识Rxjava/index.html">
+<meta property="og:site_name" content="南柯Nanke">
+<meta property="og:description" content="前言在过去的一年里，出现大量优秀的框架，火的不行，我也是从网上了解到Rx，特意搜索了相关文章，我也是通过它初步了解了Rxjava, 通过使用也慢慢领会到了其独特的魅力。">
+<meta property="og:updated_time" content="2016-09-02T08:57:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rxjava学习：初识Rxjava">
+<meta name="twitter:description" content="前言在过去的一年里，出现大量优秀的框架，火的不行，我也是从网上了解到Rx，特意搜索了相关文章，我也是通过它初步了解了Rxjava, 通过使用也慢慢领会到了其独特的魅力。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://woshishenxian.github.io/2016/08/23/Rxjava学习：初识Rxjava/"/>
+
+  <title> Rxjava学习：初识Rxjava | 南柯Nanke </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">南柯Nanke</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Rxjava学习：初识Rxjava
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-23T10:32:39+08:00" content="2016-08-23">
+              2016-08-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Rxjava学习/" itemprop="url" rel="index">
+                    <span itemprop="name">Rxjava学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/23/Rxjava学习：初识Rxjava/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/23/Rxjava学习：初识Rxjava/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在过去的一年里，出现大量优秀的框架，火的不行，我也是从网上了解到Rx，特意搜索了相关文章，我也是通过它初步了解了Rxjava, 通过使用也慢慢领会到了其独特的魅力。<br><a id="more"></a></p>
+<blockquote>
+<p><em>先谈谈我对Rxjava的认识</em></p>
+</blockquote>
+<p>首先说一下使用的感受：作为一只程序猿，最烦的就是那无穷无尽的for循环，以及那看起来都有点丧心病狂的 格式缩进，而如果使用Rxjava来进行数据处理的话，完全没有这方面的问题，你只要依次实现每一个方法就可以迅速获得同样的效果。</p>
+<p>这里借鉴一下 <a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a>一文中的例子，来给大家说明一下： </p>
+<p><em>假设有这样一个需求：界面上有一个自定义的视图 imageCollectorView ，它的作用是显示多张图片，并能使用 addImage(Bitmap) 方法来任意增加显示的图片。现在需要程序将一个给出的目录数组 File[] folders 中每个目录下的 png 图片都加载出来并显示在 imageCollectorView 中。需要注意的是，由于读取图片的这一过程较为耗时，需要放在后台执行，而图片的显示则必须在 UI 线程执行。常用的实现方式有多种，我这里贴出其中一种：</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">new Thread() &#123;</div><div class="line">    @Override</div><div class="line">    public void run() &#123;</div><div class="line">        super.run();</div><div class="line">        for (File folder : folders) &#123;</div><div class="line">            File[] files = folder.listFiles();</div><div class="line">            for (File file : files) &#123;</div><div class="line">                if (file.getName().endsWith(&quot;.png&quot;)) &#123;</div><div class="line">                    final Bitmap bitmap = getBitmapFromFile(file);</div><div class="line">                    getActivity().runOnUiThread(new Runnable() &#123;</div><div class="line">                        @Override</div><div class="line">                        public void run() &#123;</div><div class="line">                            imageCollectorView.addImage(bitmap);</div><div class="line">                        &#125;</div><div class="line">                    &#125;);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;.start();</div></pre></td></tr></table></figure>
+<p>而如果使用 RxJava ，实现方式是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">Observable.from(folders)</div><div class="line">    .flatMap(new Func1&lt;File, Observable&lt;File&gt;&gt;() &#123;</div><div class="line">        @Override</div><div class="line">        public Observable&lt;File&gt; call(File file) &#123;</div><div class="line">            return Observable.from(file.listFiles());</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">    .filter(new Func1&lt;File, Boolean&gt;() &#123;</div><div class="line">        @Override</div><div class="line">        public Boolean call(File file) &#123;</div><div class="line">            return file.getName().endsWith(&quot;.png&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">    .map(new Func1&lt;File, Bitmap&gt;() &#123;</div><div class="line">        @Override</div><div class="line">        public Bitmap call(File file) &#123;</div><div class="line">            return getBitmapFromFile(file);</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">    .subscribeOn(Schedulers.io())</div><div class="line">    .observeOn(AndroidSchedulers.mainThread())</div><div class="line">    .subscribe(new Action1&lt;Bitmap&gt;() &#123;</div><div class="line">        @Override</div><div class="line">        public void call(Bitmap bitmap) &#123;</div><div class="line">            imageCollectorView.addImage(bitmap);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div></pre></td></tr></table></figure></p>
+<p>这样，大家就可以理解， RxJava 的优秀在于其可读性，只要熟悉编写习惯后不管过多久再来看这部分代码，仍然可以很快的理解，而上面的各种for循环写出来的代码，并不具备这样的属性。</p>
+<blockquote>
+<p><em>下面就来简单的讲一下Rxjava的使用</em></p>
+</blockquote>
+<h3 id="引入RxJava"><a href="#引入RxJava" class="headerlink" title="引入RxJava"></a>引入RxJava</h3><p>RxJava 支持Java 6或者更新的版本,引入前请更新到Java 6或以上版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compile &apos;io.reactivex:rxandroid:1.2.1&apos;</div><div class="line">compile &apos;io.reactivex:rxjava:1.1.8&apos;</div></pre></td></tr></table></figure>
+<p>RxAndroid 是 Android 开发中使用 RxJava 必备元素，虽然里面只是提供了简单的两个功能。 AndroidSchedulers.mainThread()<br>和 AndroidSchedulers.handlerThread(handler) ，但这确是 Android 开发中最核心的功能之一。</p>
+<h3 id="Rxjava基本概念"><a href="#Rxjava基本概念" class="headerlink" title="Rxjava基本概念"></a>Rxjava基本概念</h3><p>下面来谈谈Rxjava几个基本概念的介绍:</p>
+<ul>
+<li>Observer（观察者）</li>
+<li>Observable （被观察者）</li>
+<li>subscribe(<em> observer </em>) （订阅）</li>
+</ul>
+<blockquote>
+<p>Observer（观察者）<br>Observer 提供一组不同的事件，并对各个事件进行实现，不关心事件何时发生，只决定事件触发的时候将有怎样的行为。</p>
+</blockquote>
+<p>本质是一个接口，提供了三个方法，需要实现。</p>
+<ul>
+<li><p>onNext(Object o): 事件队列中，RxJava 每完成一次事件都会通过调用onNext(Object o), 对结果进行相应的操作。</p>
+</li>
+<li><p>onCompleted(): 当整个事件队列完成所有的数据处理时，其将被调用。</p>
+</li>
+<li><p>onError(): 在整个事件队列中，只要有一个事件处理出现问题，其将被调用，并放弃对剩下事件的处理。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Subscriber&lt;String&gt; subscriber = new Subscriber&lt;String&gt;() &#123;</div><div class="line">  @Override</div><div class="line">  public void onNext(String s) &#123;</div><div class="line">      Log.d(tag, &quot;Item: &quot; + s);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override</div><div class="line">  public void onCompleted() &#123;</div><div class="line">      Log.d(tag, &quot;Completed!&quot;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override</div><div class="line">  public void onError(Throwable e) &#123;</div><div class="line">      Log.d(tag, &quot;Error!&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Observable（被观察者）<br>Observable 提供事件触发的场景，即决定什么时候触发事件和此时该触发什么事件，不关心事件的具体实现。</p>
+</blockquote>
+<p>其提供了多种初始化，创建对象的方法：</p>
+<ul>
+<li><p>create()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//使用Observable.create()创建被观察者</div><div class="line">Observable observable1 = Observable.create(new Observable.OnSubscribe&lt;String&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            public void call(Subscriber&lt;? super String&gt; subscriber) &#123;</div><div class="line">                subscriber.onNext(&quot;Hello&quot;);</div><div class="line">                subscriber.onNext(&quot;Wrold&quot;);</div><div class="line">                subscriber.onCompleted();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>just(T…)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Observable observable2 = Observable.just(&quot;Hello&quot;, &quot;World&quot;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>from(T[]) </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">String [] words = &#123;&quot;Hello&quot;, &quot;World&quot;&#125;;</div><div class="line">Observable observable3 = Observable.from(words);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; list = new ArrayList&lt;String&gt;();</div><div class="line">list.add(&quot;Hellow&quot;);</div><div class="line">list.add(&quot;Wrold&quot;);</div><div class="line">Observable observable4 = Observable.from(list);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>subscribe(<em> observer </em>) （订阅）<br>创建Observable和Observer之后，通过subscribe()方法将它们结合起来。</p>
+</blockquote>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>对Rxjava作了一个简单的介绍，从基础知识开始讲起可能比较枯燥，没有多少实践，但是基础的重要性不言而喻，尤其对于Rxjava来说，其代码的编写习惯与我们平常不太一样，其链式的风格更加简洁，当你慢慢习惯，你将领会其独特的魅力。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Rxjava/" rel="tag">#Rxjava</a>
+          
+            <a href="/tags/RxAndroid/" rel="tag">#RxAndroid</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/18/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/25/Rxjava学习：谈谈Rxjava的使用/" rel="prev" title="Rxjava学习：谈谈Rxjava的使用">
+                Rxjava学习：谈谈Rxjava的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/23/Rxjava学习：初识Rxjava/"
+           data-title="Rxjava学习：初识Rxjava" data-url="https://woshishenxian.github.io/2016/08/23/Rxjava学习：初识Rxjava/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img1.2345.com/duoteimg/qqTxImg/2013/12/ns/18-024824_754.jpg"
+               alt="南柯Nanke" />
+          <p class="site-author-name" itemprop="name">南柯Nanke</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/woshishenxian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/2c959b909679/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-book"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入RxJava"><span class="nav-number">2.</span> <span class="nav-text">引入RxJava</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rxjava基本概念"><span class="nav-number">3.</span> <span class="nav-text">Rxjava基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南柯Nanke</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VENS/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VENS/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VENS/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VENS/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VENS/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VENS/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"vince"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/VENS/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

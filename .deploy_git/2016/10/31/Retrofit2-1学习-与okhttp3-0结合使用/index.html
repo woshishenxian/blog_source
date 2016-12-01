@@ -1,0 +1,716 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/VENS/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/VENS/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/woshishenxian/woshishenxian.github.io/master/images/bitbug_favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1.添加日志输出12Retrofit retrofit = new Retrofit.Builder().client(new OkHttpClient.Builder().addNetworkInterceptor(   new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)).build());">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Retrofit2.1学习:与okhttp3.0结合使用">
+<meta property="og:url" content="https://woshishenxian.github.io/2016/10/31/Retrofit2-1学习-与okhttp3-0结合使用/index.html">
+<meta property="og:site_name" content="南柯Nanke">
+<meta property="og:description" content="1.添加日志输出12Retrofit retrofit = new Retrofit.Builder().client(new OkHttpClient.Builder().addNetworkInterceptor(   new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)).build());">
+<meta property="og:image" content="https://woshishenxian.github.io/imgs/2149115-f2becc1a2a11fcfc.jpg">
+<meta property="og:image" content="https://woshishenxian.github.io/imgs/2149115-a75ab976a221b88c.png">
+<meta property="og:updated_time" content="2016-11-14T02:58:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Retrofit2.1学习:与okhttp3.0结合使用">
+<meta name="twitter:description" content="1.添加日志输出12Retrofit retrofit = new Retrofit.Builder().client(new OkHttpClient.Builder().addNetworkInterceptor(   new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)).build());">
+<meta name="twitter:image" content="https://woshishenxian.github.io/imgs/2149115-f2becc1a2a11fcfc.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://woshishenxian.github.io/2016/10/31/Retrofit2-1学习-与okhttp3-0结合使用/"/>
+
+  <title> Retrofit2.1学习:与okhttp3.0结合使用 | 南柯Nanke </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">南柯Nanke</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Retrofit2.1学习:与okhttp3.0结合使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-31T09:15:36+08:00" content="2016-10-31">
+              2016-10-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Retrofit2-1/" itemprop="url" rel="index">
+                    <span itemprop="name">Retrofit2.1</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/31/Retrofit2-1学习-与okhttp3-0结合使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/31/Retrofit2-1学习-与okhttp3-0结合使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/imgs/2149115-f2becc1a2a11fcfc.jpg" alt="配图"></p>
+<h3 id="1-添加日志输出"><a href="#1-添加日志输出" class="headerlink" title="1.添加日志输出"></a>1.添加日志输出</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Retrofit retrofit = new Retrofit.Builder().client(new OkHttpClient.Builder().addNetworkInterceptor(</div><div class="line">   new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)).build());</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<hr>
+<h3 id="2-添加请求头信息"><a href="#2-添加请求头信息" class="headerlink" title="2.添加请求头信息"></a>2.添加请求头信息</h3><p>在 <a href="http://www.jianshu.com/p/8cf33ad72211" target="_blank" rel="external">Retrofit官方文档的翻译</a> 一文中有提到，<strong>每一个请求都需要添加相同的 header的时候可以使用 OkHttp 的 interceptor 来指定。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">new Retrofit.Builder()</div><div class="line">           .addConverterFactory(GsonConverterFactory.create())</div><div class="line">           .client(new OkHttpClient.Builder()</div><div class="line">                   .addInterceptor(new Interceptor() &#123;</div><div class="line">                       @Override</div><div class="line">                       public Response intercept(Chain chain) throws IOException &#123;</div><div class="line">                           Request request = chain.request()</div><div class="line">                                   .newBuilder()</div><div class="line">                                   .addHeader(&quot;Accept&quot;, &quot;application/vnd.github.v3.full+json&quot;)</div><div class="line">                                   .addHeader(&quot;User-Agent&quot;, &quot;Retrofit-Sample-App&quot;)</div><div class="line">                                   .build();</div><div class="line">                           return chain.proceed(request);</div><div class="line">                       &#125;</div><div class="line">                   &#125;)</div><div class="line"></div><div class="line">                   .build()</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="3-支持自签名的https"><a href="#3-支持自签名的https" class="headerlink" title="3.支持自签名的https"></a>3.支持自签名的https</h3><p>首先这里要说一下，看到网上说了很多okhttp如何支持https的文章。首先要了解的是，okhttp默认情况下是支持https协议的网站的，比如 <em><a href="https://www.baidu.com" target="_blank" rel="external">https://www.baidu.com</a></em> 等，这些网站可以直接通过okhttp请求，不需要添加而外的支持。不过要注意的是，支持的https的网站基本都是CA机构颁发的证书，默认情况下是可以信任的。</p>
+<p>然后我们今天要说的是自签名的https，什么叫自签名呢？就是自己通过keytool去生成一个证书，然后使用，并不是CA机构去颁发的。使用自签名证书的网站，大家在使用浏览器访问的时候，一般都是报风险警告，好在有个大名鼎鼎的网站就是这么干的，<a href="https://kyfw.12306.cn/otn/" target="_blank" rel="external">https://kyfw.12306.cn/otn/</a> ，点击进入12306的购票页面就能看到了。</p>
+<p>在写本文之前也查看了很多资料，我呢，尽量把每一步都说的详细一点。</p>
+<blockquote>
+<p>SSL单向认证</p>
+</blockquote>
+<p>加入证书源文件，证书可以放在assets 下面，或者raw 下面也是可以的：</p>
+<p><img src="/imgs/2149115-a75ab976a221b88c.png" alt="配图1"></p>
+<ul>
+<li><p>构造keyStore对象， 然后将得到的CertificateStream放入到keyStore中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">InputStream certificateStream = mContext.getResources().openRawResource(R.raw.srca);</div><div class="line"></div><div class="line"> KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());</div><div class="line"></div><div class="line"> keyStore.load(certificateStream, &quot;password&quot;.toCharArray());</div></pre></td></tr></table></figure>
+</li>
+<li><p>接下来利用keyStore去初始化我们的TrustManagerFactory.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">TrustManagerFactory trustManagerFactory = </div><div class="line">          TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()); </div><div class="line">trustManagerFactory.init(keyStore);</div></pre></td></tr></table></figure>
+<ul>
+<li>由trustManagerFactory.getTrustManagers获得TrustManager[]初 始化我们的SSLContext<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//&quot;TLS&quot; SSL协议 由服务器端确定</div><div class="line">SSLContext sslContext = SSLContext.getInstance(&quot;TLS&quot;);</div><div class="line">sslContext.init ( </div><div class="line">                null, </div><div class="line">                trustManagerFactory.getTrustManagers(), </div><div class="line">                null);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>根据okhttp3.0以前的版本，上面这样写是没问题的，3.0以后版本API文档中，这样写道:<br>If necessary, you can create and configure the defaults yourself with the following code:<br>如果有必要，你可以参考下面的代码根据自己的需求创建和设置的默认值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(</div><div class="line">       TrustManagerFactory.getDefaultAlgorithm());</div><div class="line"> trustManagerFactory.init((KeyStore) null);</div><div class="line"> TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();</div><div class="line">if (trustManagers.length != 1 || !(trustManagers[0] instanceof X509TrustManager)) &#123;</div><div class="line">     throw new IllegalStateException(&quot;Unexpected default trust managers:&quot;</div><div class="line">         + Arrays.toString(trustManagers));</div><div class="line">   &#125;</div><div class="line">X509TrustManager trustManager = (X509TrustManager) trustManagers[0];</div><div class="line"></div><div class="line">SSLContext sslContext = SSLContext.getInstance(&quot;TLS&quot;);</div><div class="line">sslContext.init(null, new TrustManager[] &#123; trustManager &#125;, null);</div><div class="line">SSLSocketFactory sslSocketFactory =</div><div class="line">        sslContext.getSocketFactory();</div><div class="line"></div><div class="line">OkHttpClient client = new OkHttpClient.Builder()</div><div class="line">       .sslSocketFactory(sslSocketFactory, trustManager);</div><div class="line">       .build();</div></pre></td></tr></table></figure>
+<ul>
+<li>那根据上面的提供，我们来修改一下SSLContext的初始化：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">TrustsManager[] trustManagers = trustManagerFactory.getTrustManagers();</div><div class="line">X509TrustManager trustManager = chooseTrustManager(trustManagers);</div><div class="line">if (trustManager != null) &#123;   </div><div class="line">     trustManager = new MyTrustManager(chooseTrustManager(trustManagers));</div><div class="line">     &#125; else &#123;  </div><div class="line">      trustManager = new UnSafeTrustManager();</div><div class="line">     &#125;</div><div class="line">sslContext.init(null, new TrustManager[]&#123;trustManager&#125;, null);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">private static X509TrustManager chooseTrustManager(TrustManager[] trustManagers) &#123;</div><div class="line">    for (TrustManager trustManager : trustManagers) &#123;</div><div class="line">        if (trustManager instanceof X509TrustManager) &#123;</div><div class="line">            return (X509TrustManager) trustManager;</div><div class="line">        &#125;    </div><div class="line">  &#125; </div><div class="line">  return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">private static class MyTrustManager implements X509TrustManager &#123;</div><div class="line">    private X509TrustManager defaultTrustManager;</div><div class="line">    private X509TrustManager localTrustManager;</div><div class="line">    public MyTrustManager(X509TrustManager localTrustManager) throws NoSuchAlgorithmException, KeyStoreException &#123;</div><div class="line">        TrustManagerFactory var4 = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());</div><div class="line">        var4.init((KeyStore) null);</div><div class="line">        this.defaultTrustManager = chooseTrustManager(var4.getTrustManagers());</div><div class="line">        this.localTrustManager = localTrustManager;</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException &#123;</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException &#123;</div><div class="line">        try &#123;</div><div class="line">            localTrustManager.checkServerTrusted(chain, authType);</div><div class="line">        &#125; catch (CertificateException ce) &#123;</div><div class="line">            defaultTrustManager.checkServerTrusted(chain, authType);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public X509Certificate[] getAcceptedIssuers() &#123;</div><div class="line">        return new X509Certificate[0];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>最后，设置我们OkHttpClient即可。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">OkHttpClient okHttpClient = new OkHttpClient.Builder()</div><div class="line">        .sslSocketFactory(sslContext.getSocketFactory(), trustManager)).build();</div></pre></td></tr></table></figure>
+<p>到此为止，单向认证基本讲完了 ，接下来双向认证就相对简单了。</p>
+<blockquote>
+<p>SSL双向认证</p>
+</blockquote>
+<p>核心代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//初始化keystore</div><div class="line">KeyStore clientKeyStore = KeyStore.getInstance(KeyStore.getDefaultType());</div><div class="line">clientKeyStore.load(mContext.getAssets().open(&quot;zhy_client.bks&quot;), &quot;123456&quot;.toCharArray());</div><div class="line"></div><div class="line">KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());</div><div class="line">keyManagerFactory.init(clientKeyStore, &quot;123456&quot;.toCharArray());</div><div class="line"></div><div class="line">sslContext.init(keyManagerFactory.getKeyManagers(), new TrustManager[]&#123;trustManager&#125;, null);</div></pre></td></tr></table></figure></p>
+<p>关于客户端证书文件，Java平台默认识别jks格式的证书文件，但是android平台只识别bks格式的证书文件。</p>
+<hr>
+<h3 id="4-认证机构认证后的https"><a href="#4-认证机构认证后的https" class="headerlink" title="4.认证机构认证后的https"></a>4.认证机构认证后的https</h3><blockquote>
+<p>添加证书certificatePinner<br>certificatePinner(CertificatePinner certificatePinner) 的是在 由正式证书颁发机构认证的情况下，避免证书颁发机构的非法访问。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">OkHttpClient client = new OkHttpClient.Builder()</div><div class="line">    .certificatePinner(new CertificatePinner.Builder()</div><div class="line">            .add(&quot;YOU API.com&quot;, &quot;sha1/DmxUShsZuNiqPQsX2Oi9uv2sCnw=&quot;)</div><div class="line">            .add(&quot;YOU API..com&quot;, &quot;sha1/SXxoaOSEzPC6BgGmxAt/EAcsajw=&quot;)</div><div class="line">            .add(&quot;YOU API..com&quot;, &quot;sha1/blhOM3W9V/bVQhsWAcLYwPU6n24=&quot;)</div><div class="line">            .add(&quot;YOU API..com&quot;, &quot;sha1/T5x9IXmcrQ7YuQxXnxoCmeeQ84c=&quot;)</div><div class="line">            .build())</div></pre></td></tr></table></figure>
+<blockquote>
+<p>这是主机名验证<br>设置用于确认响应证书申请请求的主机名的HTTPS连接的验证。<br>如果不设置，默认的主机名校验将被使用。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">okhttpBuilder.hostnameVerifier(HttpsFactroy.getHostnameVerifier(hosts));</div></pre></td></tr></table></figure>
+<p>最后，Retrofit与 okhttp3.0的结合：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">retrofit = new Retrofit.Builder().client(client).build();</div></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>关于okhttp的使用，本文不多说，主要是retrofit与okhttp相结合使用中用到的部分，本文也只是本人在 okhttp 与 retrofit 的结合使用中的一点总结，如果有不对的地方，望书友们指导。</p>
+<hr>
+<p>参考文章：</p>
+<ul>
+<li><a href="http://www.jianshu.com/p/16994e49e2f6" target="_blank" rel="external">Retrofit 2.0 超能实践，完美支持加密Https传输</a></li>
+<li><a href="http://square.github.io/okhttp/3.x/okhttp/" target="_blank" rel="external">okHttp官方文档</a></li>
+<li><a href="http://blog.csdn.net/lmj623565791/article/details/48129405" target="_blank" rel="external">Android Https相关完全解析 当OkHttp遇到Https</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/28/Android性能优化方法：内存泄露优化/" rel="next" title="Android性能优化方法：内存泄露优化">
+                <i class="fa fa-chevron-left"></i> Android性能优化方法：内存泄露优化
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/11/Retrofit2-1学习-与Rxjava结合使用/" rel="prev" title="Retrofit2.1学习:与Rxjava结合使用">
+                Retrofit2.1学习:与Rxjava结合使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/31/Retrofit2-1学习-与okhttp3-0结合使用/"
+           data-title="Retrofit2.1学习:与okhttp3.0结合使用" data-url="https://woshishenxian.github.io/2016/10/31/Retrofit2-1学习-与okhttp3-0结合使用/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img1.2345.com/duoteimg/qqTxImg/2013/12/ns/18-024824_754.jpg"
+               alt="南柯Nanke" />
+          <p class="site-author-name" itemprop="name">南柯Nanke</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/woshishenxian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/2c959b909679/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-book"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-添加日志输出"><span class="nav-number">1.</span> <span class="nav-text">1.添加日志输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-添加请求头信息"><span class="nav-number">2.</span> <span class="nav-text">2.添加请求头信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-支持自签名的https"><span class="nav-number">3.</span> <span class="nav-text">3.支持自签名的https</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-认证机构认证后的https"><span class="nav-number">4.</span> <span class="nav-text">4.认证机构认证后的https</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南柯Nanke</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VENS/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VENS/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VENS/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VENS/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VENS/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VENS/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"vince"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/VENS/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
